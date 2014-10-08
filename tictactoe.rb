@@ -58,6 +58,16 @@ class TicTacToe
 
 		return s.ord - 48
 	end
+	
+
+	def computerTurn
+		puts "\nMy turn!"
+
+		# I'll be trying my hand at a rather defensive AI
+		# First it'll check to see if the player is about to win, and if so,
+		# attempt to cut them off.
+
+	end
 
 	def go
 		input = gets.chomp
@@ -65,13 +75,16 @@ class TicTacToe
 		while input != "q"
 			if input.ord >= 49 && input.ord <= 57
 				if isThisBoxAvailable(myAtoI(input))
-					# code
+					@@board[myAtoI(input)] = "X"
+					printBoard
 				else
 					puts "Hey, that square is already taken! Try another one."
 				end
 			else
 				puts "Hey, I don't recognize that input. Try again!"
 			end
+
+			puts "\nIt's your turn!"
 			input = gets.chomp
 		end
 	end
