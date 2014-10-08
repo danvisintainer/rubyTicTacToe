@@ -1,5 +1,5 @@
 class TicTacToe
-	@@board = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+	@@board = ["0", "1", "X", "3", "4", "5", "6", "7", "8", "9"]
 	@@used = 0
 
 	def printBoard
@@ -48,9 +48,31 @@ class TicTacToe
 
 	def isThisBoxAvailable(n)
 		if @@board[n] == "X" || @@board[n] == "O"
-			return true
-		else
 			return false
+		else
+			return true
+		end
+	end
+
+	def myAtoI(s)
+
+		return s.ord - 48
+	end
+
+	def go
+		input = gets.chomp
+
+		while input != "q"
+			if input.ord >= 49 && input.ord <= 57
+				if isThisBoxAvailable(myAtoI(input))
+					# code
+				else
+					puts "Hey, that square is already taken! Try another one."
+				end
+			else
+				puts "Hey, I don't recognize that input. Try again!"
+			end
+			input = gets.chomp
 		end
 	end
 end
@@ -63,12 +85,7 @@ def playTicTacToe
 	game.printBoard
 	puts "\nYou go first. Enter the number of the box\nyou want to place your X. Enter 'q' to quit."
 
-	#input = gets.chomp
-
-	#while input != "q"
-	#	processInput
-	#	input = gets.chomp
-	#end
+	game.go
 
 	true
 end
