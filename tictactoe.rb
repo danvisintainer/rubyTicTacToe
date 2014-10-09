@@ -63,6 +63,8 @@ class TicTacToe
 		puts "\nMy turn!"
 		tookTurn = false
 		unused = []
+
+		sleep(0.5)
 		# I'll be trying my hand at a rather defensive AI
 		# First it'll check to see if the player is about to win, and if so,
 		# attempt to cut them off.
@@ -77,7 +79,6 @@ class TicTacToe
 			j = 0
 			while j < 3
 				if @@board[i + j] == "X"
-					puts "X marked at %s." % [i + j]
 					n += 1
 				end
 				j += 1
@@ -85,7 +86,6 @@ class TicTacToe
 
 			if n == 2	# if a danger is detected (2 "X"s on a row), it'll cut
 						# off the player.
-				puts "Horizontal danger found! (i = %s)" % [i]
 				if @@board[i] != "O" && @@board[i] != "X"
 					@@board[i] = "O"
 					tookTurn = true
@@ -96,7 +96,6 @@ class TicTacToe
 					@@board[i+2] = "O"
 					tookTurn = true
 				else
-					puts "Hmm, there's been an unexpected problem."
 				end
 
 			end
@@ -120,7 +119,6 @@ class TicTacToe
 
 			if n == 2	# if a danger is detected (2 "X"s on a row), it'll cut
 						# off the player.
-				puts "Vertical danger found! (i = %s)" % [i]
 				if @@board[i] != "O" && @@board[i] != "X"
 					@@board[i] = "O"
 					tookTurn = true
@@ -131,7 +129,6 @@ class TicTacToe
 					@@board[i+6] = "O"
 					tookTurn = true
 				else
-					puts "Hmm, there's been an unexpected problem."
 				end
 
 			end
@@ -150,9 +147,8 @@ class TicTacToe
 				i += 4
 			end
 			if n == 2
-				puts "Diagonal danger found! (i = %s)" % [i]
 				if @@board[1] != "O" && @@board[1] != "X"
-						@@board[1] = "O"
+					@@board[1] = "O"
 					tookTurn = true
 				elsif @@board[5] != "O" && @@board[5] != "X"
 					@@board[5] = "O"
@@ -161,7 +157,6 @@ class TicTacToe
 					@@board[9] = "O"
 					tookTurn = true
 				else
-					puts "Hmm, there's been an unexpected problem."
 				end
 			end
 
@@ -174,9 +169,8 @@ class TicTacToe
 				i += 2
 			end
 			if n == 2
-				puts "Diagonal danger found! (i = %s)" % [i]
 				if @@board[3] != "O" && @@board[3] != "X"
-						@@board[3] = "O"
+					@@board[3] = "O"
 					tookTurn = true
 				elsif @@board[5] != "O" && @@board[5] != "X"
 					@@board[5] = "O"
@@ -185,14 +179,11 @@ class TicTacToe
 					@@board[7] = "O"
 					tookTurn = true
 				else
-					puts "Hmm, there's been an unexpected problem."
 				end
 			end
 		end
-
-		puts "No dangers found anywhere, I'll just take a random square."
 		
-		if tookTurn = false
+		if tookTurn == false
 			i = 1
 			while i < 9
 				if @@board[i] != "O" && @@board[i] != "X"
@@ -207,6 +198,7 @@ class TicTacToe
 		if tookTurn
 			@@used += 1
 		end
+
 		printBoard
 	end
 
