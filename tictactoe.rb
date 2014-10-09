@@ -195,6 +195,7 @@ class TicTacToe
 			end
 
 			@@board[myAtoI(unused.sample)] = "O"
+			tookTurn = true
 		end
 
 		if tookTurn
