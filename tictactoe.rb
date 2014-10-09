@@ -159,7 +159,9 @@ class TicTacToe
 				else
 				end
 			end
+		end
 
+		if tookTurn == false
 			n = 0
 			i = 3
 			while i <= 7
@@ -219,7 +221,17 @@ class TicTacToe
 						puts "It's a draw game...!"
 						return true
 					else
-						computerTurn
+					end
+					
+					computerTurn
+
+					if @@used >= 5 && thereIsAWinner
+						puts "There is a winner!"
+						return true
+					elsif @@used >= 9
+						puts "It's a draw game...!"
+						return true
+					else
 					end
 						
 				else
