@@ -238,6 +238,7 @@ class TicTacToe
 						puts "It's a draw game...!"
 						return true
 					else
+						puts "\nIt's your turn!"
 					end
 						
 				else
@@ -247,7 +248,7 @@ class TicTacToe
 				puts "Hey, I don't recognize that input. Try again!"
 			end
 
-			puts "\nIt's your turn!"
+			
 			input = gets.chomp
 		end
 	end
