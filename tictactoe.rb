@@ -3,17 +3,17 @@ class TicTacToe
 	@@used = 0
 
 	def printBoard
-		puts "     |     |     "
-		puts "\n " + @@board[1] + " | " + @@board[2] + " | " + @@board[3]
-		puts "     |     |     "
-		puts "-----|-----|-----"
-		puts "     |     |     "
-		puts " " + @@board[4] + " | " + @@board[5] + " | " + @@board[6]
-		puts "     |     |     "
-		puts "-----|-----|-----"
-		puts "     |     |     "
-		puts " " + @@board[7] + " | " + @@board[8] + " | " + @@board[9] + "\n"
-		puts "     |     |     "
+		puts "\n            |     |     "
+		puts "         " + @@board[1] + "  |  " + @@board[2] + "  |  " + @@board[3]
+		puts "            |     |     "
+		puts "       -----+-----+-----"
+		puts "            |     |     "
+		puts "         " + @@board[4] + "  |  " + @@board[5] + "  |  " + @@board[6]
+		puts "            |     |     "
+		puts "       -----+-----+-----"
+		puts "            |     |     "
+		puts "         " + @@board[7] + "  |  " + @@board[8] + "  |  " + @@board[9] + "\n"
+		puts "            |     |     "
 	end
 
 	def thereIsAWinner
@@ -70,7 +70,6 @@ class TicTacToe
 		tookTurn = false
 		unused = []
 
-		sleep(0.5)
 		# I'll be trying my hand at a rather defensive AI
 		# First it'll check to see if the player is about to win, and if so,
 		# attempt to cut them off.
