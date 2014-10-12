@@ -17,6 +17,12 @@ class TicTacToe
 		puts "            |     |     "
 	end
 
+	def reset
+		@@board = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+		@@used = 0
+		@@winner = ""
+	end
+
 	def thereIsAWinner
 		# check for horizontal wins:
 
@@ -31,12 +37,13 @@ class TicTacToe
 
 		# check for vertical wins:
 		i = 1
-		while i < 9
+		while i < 4
 			if @@board[i] == @@board[i+3] && @@board[i+3] == @@board[i+6]
 				@@winner = @@board[i]
+				puts "Verital win on %s" % [i]
 				return true
 			end
-			i += 3
+			i += 1
 		end
 
 		# check for diagonal wins
@@ -113,7 +120,7 @@ class TicTacToe
 		# now, we'll check for vertical dangers.
 		n = 0
 		i = 1
-		while i < 3 && n < 2 && tookTurn == false
+		while i < 4 && n < 2 && tookTurn == false
 		# the tookTurn check is to ensure the program does not take two turns
 			n = 0
 			j = 0
@@ -233,7 +240,7 @@ class TicTacToe
 							puts "Unfortunately, there was an unexpected problem."
 						end
 					elsif @@used >= 9
-						puts "It's a draw game...!"
+						puts "It's a draw game..."
 						return true
 					else
 					end
@@ -241,10 +248,17 @@ class TicTacToe
 					computerTurn
 
 					if @@used >= 5 && thereIsAWinner
-						puts "There is a winner!"
-						return true
+						if @@winner == "X"
+							puts "Congratulations, you win!"
+							return true
+						elsif @@winner == "O"
+							puts "I win!"
+							return true
+						else
+							puts "Unfortunately, there was an unexpected problem."
+						end
 					elsif @@used >= 9
-						puts "It's a draw game...!"
+						puts "It's a draw game..."
 						return true
 					else
 						puts "\nIt's your turn!"
@@ -271,6 +285,7 @@ def playTicTacToe
 	game.printBoard
 	puts "\nYou go first. Enter the number of the box\nyou want to place your X. Enter 'q' to quit."
 
+	#game.reset
 	game.go
 
 	true
