@@ -1,6 +1,7 @@
 class TicTacToe
 	@@board = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 	@@used = 0
+	@@winner = ""
 
 	def printBoard
 		puts "\n            |     |     "
@@ -18,10 +19,11 @@ class TicTacToe
 
 	def thereIsAWinner
 		# check for horizontal wins:
+
 		i = 1
 		while i < 9
 			if @@board[i] == @@board[i+1] && @@board[i+1] == @@board[i+2]
-				puts "Horizontal win on row %s" % [i]
+				@@winner = @@board[i]
 				return true
 			end
 			i += 3
@@ -31,7 +33,7 @@ class TicTacToe
 		i = 1
 		while i < 9
 			if @@board[i] == @@board[i+3] && @@board[i+3] == @@board[i+6]
-				puts "Vertical win on column %s" % [i]
+				@@winner = @@board[i]
 				return true
 			end
 			i += 3
@@ -39,13 +41,13 @@ class TicTacToe
 
 		# check for diagonal wins
 		if @@board[1] == @@board[5] && @@board[5] == @@board[9]
-			puts "Inverse diagonal win"
-			return true
+				@@winner = @@board[1]
+				return true
 		end
 
 		if @@board[3] == @@board[5] && @@board[5] == @@board[7]
-			puts "Diagonal win"
-			return true
+				@@winner = @@board[3]
+				return true
 		end
 
 		# return false if no wins.
@@ -221,8 +223,15 @@ class TicTacToe
 					printBoard
 
 					if @@used >= 5 && thereIsAWinner
-						puts "There is a winner!"
-						return true
+						if @@winner == "X"
+							puts "Congratulations, you win!"
+							return true
+						elsif @@winner == "O"
+							puts "I win!"
+							return true
+						else
+							puts "Unfortunately, there was an unexpected problem."
+						end
 					elsif @@used >= 9
 						puts "It's a draw game...!"
 						return true
