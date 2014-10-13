@@ -362,11 +362,16 @@ class TicTacToe
 
 	# go is where the game loop happens.
 	def go
-		turnTaken = false
+		userError = false
 		input = ""
 
 		while input != "q"
 			if @@turn == 0	# if it's the player's turn
+				if !userError
+					puts "It's your turn!"
+				end
+				userError = false
+
 				input = gets.chomp
 				if input.ord >= 49 && input.ord <= 57
 					if isThisBoxAvailable(myAtoI(input))
@@ -375,9 +380,11 @@ class TicTacToe
 						@@turn = 1
 					else
 						puts "Hey, that square is already taken. Choose another one!"
+						userError = true
 					end
 				else
 					puts "Your input is invalid. Try again!"
+					userError = true
 				end
 			
 			elsif @@turn == 1	# if it's the computer's turn
@@ -385,28 +392,30 @@ class TicTacToe
 				@@turn = 0
 			end
 
-			puts "Next turn. (%s)" % [@@turn]
-			printBoard
+			# puts "Next turn. (%s)" % [@@turn]
+			if !userError
+				printBoard
 
-			# there could only possibly be a winner if 5 or more
-			# squares were used, so we'll check for winners
-			# at that point.
+				# there could only possibly be a winner if 5 or more
+				# squares were used, so we'll check for winners
+				# at that point.
 
-			if @@used >= 5 && thereIsAWinner
-				if @@winner == "X"
-					puts "Congratulations, you win!"
-					return true
-				elsif @@winner == "O"
-					puts "I win!"
+				if @@used >= 5 && thereIsAWinner
+					if @@winner == "X"
+						puts "Congratulations, you win!"
+						return true
+					elsif @@winner == "O"
+						puts "I win!"
+						return true
+					else
+						puts "Unfortunately, there was an unexpected problem."
+						return false
+					end
+				elsif @@used >= 9
+					puts "It's a draw game..."
 					return true
 				else
-					puts "Unfortunately, there was an unexpected problem."
-					return false
 				end
-			elsif @@used >= 9
-				puts "It's a draw game..."
-				return true
-			else
 			end
 
 		end
