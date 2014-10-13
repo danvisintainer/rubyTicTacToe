@@ -80,7 +80,77 @@ class TicTacToe
 		unused = []
 
 		# I'll be trying my hand at a rather defensive AI
-		# First it'll check to see if the player is about to win, and if so,
+		# First and above all else, if the computer has the chance to win,
+		# it will.		
+
+		# check for horizontal dangers:
+		i = 1	
+		n = 0
+
+		while i < 9 && n < 2 && tookTurn == false
+			n = 0	# this is used to count up the number of "X"s - if there's
+					# 2 in a row, column, that's dangerous for the computer
+			j = 0
+			while j < 3
+				if @@board[i + j] == "O"
+					n += 1
+				end
+				j += 1
+			end
+
+			if n == 2	# if a danger is detected (2 "X"s on a row), it'll cut
+						# off the player.
+				if @@board[i] != "O" && @@board[i] != "X"
+					@@board[i] = "O"
+					tookTurn = true
+				elsif @@board[i+1] != "O" && @@board[i+1] != "X"
+					@@board[i+1] = "O"
+					tookTurn = true
+				elsif @@board[i+2] != "O" && @@board[i+2] != "X"
+					@@board[i+2] = "O"
+					tookTurn = true
+				else
+				end
+
+			end
+
+			i += 3
+		end
+
+		# now, we'll check for vertical dangers.
+		n = 0
+		i = 1
+		while i < 4 && n < 2 && tookTurn == false
+		# the tookTurn check is to ensure the program does not take two turns
+			n = 0
+			j = 0
+			while j <= 9
+				if @@board[i + j] == "O"
+					n += 1
+				end
+				j += 3
+			end
+
+			if n == 2	# if a danger is detected (2 "X"s on a row), it'll cut
+						# off the player.
+				if @@board[i] != "O" && @@board[i] != "X"
+					@@board[i] = "O"
+					tookTurn = true
+				elsif @@board[i+3] != "O" && @@board[i+3] != "X"
+					@@board[i+3] = "O"
+					tookTurn = true
+				elsif @@board[i+6] != "O" && @@board[i+6] != "X"
+					@@board[i+6] = "O"
+					tookTurn = true
+				else
+				end
+
+			end
+
+			i += 1
+		end
+
+		# Now it'll check to see if the player is about to win, and if so,
 		# attempt to cut them off.
 
 		# check for horizontal dangers:
