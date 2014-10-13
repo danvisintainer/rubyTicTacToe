@@ -10,7 +10,10 @@ class TicTacToe
 	@@board = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 	@@used = 0
 	@@winner = ""
+	@@turn = 0
 
+	# printBoard outputs the current board to the screen in a [semi]readable
+	# format
 	def printBoard
 		puts "\n            |     |     "
 		puts "         " + @@board[1] + "  |  " + @@board[2] + "  |  " + @@board[3]
@@ -25,12 +28,16 @@ class TicTacToe
 		puts "            |     |     "
 	end
 
+	# reset initializes the board back to the initial state
 	def reset
 		@@board = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 		@@used = 0
 		@@winner = ""
 	end
 
+	# thereIsAWinner checks the board to see if someone won the game - returns
+	# "true" if so, and "false" otherwise. it also records what the winner is
+	# in the @@winner variable
 	def thereIsAWinner
 		# check for horizontal wins:
 
@@ -68,6 +75,8 @@ class TicTacToe
 		false
 	end
 
+	# isThisBoxAvailable is a quick function to determine whether a box has
+	# been used. returns "true" if available, "false" otherwise.
 	def isThisBoxAvailable(n)
 		if @@board[n] == "X" || @@board[n] == "O"
 			return false
@@ -76,27 +85,33 @@ class TicTacToe
 		end
 	end
 
+	# myAtoI is a very quick-and-dirty aToI function
 	def myAtoI(s)
 		return s.ord - 48
 	end
 	
+	# computerTurn is the function in which the computer takes its turn.
+	# i tried my hand at a rather defensive AI that prioritizes cutting off
+	# the player from winning rather than try to win on its own.
 
+	# first, if it has the opportunity to win on its turn, it will do so
+	# immediately. it will then check to see if it's in a situation in which
+	# the player is about to win, and if so, try to cut off the player.
+	# lastly, if none of those scenarios apply then it will just pick a
+	# random available spot.
 	def computerTurn
 		puts "\nMy turn!"
 		tookTurn = false
-		unused = []
-
-		# I'll be trying my hand at a simple but rather defensive AI
-		# First and above all else, if the program has the chance to win,
-		# it will.		
+		unused = []	
 
 		# Here the program will check to see if it can win horizontally:
 		i = 1	
 		n = 0
 
 		while i < 9 && n < 2 && tookTurn == false
-			n = 0	# this is used to count up the number of "X"s - if there's
-					# 2 in a row, column, that's dangerous for the computer
+			n = 0	# this is used to count up the number of "O"s.
+					# if 2 "O"s are detected on the same row, it will finish the row
+					# and win.
 			j = 0
 			while j < 3
 				if @@board[i + j] == "O"
@@ -138,8 +153,7 @@ class TicTacToe
 				j += 3
 			end
 
-			if n == 2	# if a danger is detected (2 "X"s on a row), it'll cut
-						# off the player.
+			if n == 2	
 				if @@board[i] != "O" && @@board[i] != "X"
 					@@board[i] = "O"
 					tookTurn = true
@@ -216,8 +230,7 @@ class TicTacToe
 		n = 0
 
 		while i < 9 && n < 2 && tookTurn == false
-			n = 0	# this is used to count up the number of "X"s - if there's
-					# 2 in a row, column, that's dangerous for the computer
+			n = 0
 			j = 0
 			while j < 3
 				if @@board[i + j] == "X"
@@ -349,6 +362,7 @@ class TicTacToe
 		printBoard
 	end
 
+	# go is where the game loop happens.
 	def go
 		input = gets.chomp
 
@@ -359,6 +373,9 @@ class TicTacToe
 					@@used += 1
 					printBoard
 
+					# there could only possibly be a winner if 5 or more
+					# squares were used, so we'll check for winners
+					# at that point.
 					if @@used >= 5 && thereIsAWinner
 						if @@winner == "X"
 							puts "Congratulations, you win!"
@@ -368,6 +385,7 @@ class TicTacToe
 							return true
 						else
 							puts "Unfortunately, there was an unexpected problem."
+							return false
 						end
 					elsif @@used >= 9
 						puts "It's a draw game..."
@@ -418,6 +436,5 @@ def playTicTacToe
 	game.reset
 	game.go
 
-	true
 end
 
