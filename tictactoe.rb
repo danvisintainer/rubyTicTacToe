@@ -80,10 +80,10 @@ class TicTacToe
 		unused = []
 
 		# I'll be trying my hand at a rather defensive AI
-		# First and above all else, if the computer has the chance to win,
+		# First and above all else, if the program has the chance to win,
 		# it will.		
 
-		# check for horizontal dangers:
+		# Here the program will check to see if it can win horizontally:
 		i = 1	
 		n = 0
 
@@ -98,8 +98,8 @@ class TicTacToe
 				j += 1
 			end
 
-			if n == 2	# if a danger is detected (2 "X"s on a row), it'll cut
-						# off the player.
+			if n == 2	
+				# here, 
 				if @@board[i] != "O" && @@board[i] != "X"
 					@@board[i] = "O"
 					tookTurn = true
@@ -117,7 +117,7 @@ class TicTacToe
 			i += 3
 		end
 
-		# now, we'll check for vertical dangers.
+		# now, we'll check to see if it can win vertically.
 		n = 0
 		i = 1
 		while i < 4 && n < 2 && tookTurn == false
@@ -150,8 +150,59 @@ class TicTacToe
 			i += 1
 		end
 
-		# Now it'll check to see if the player is about to win, and if so,
-		# attempt to cut them off.
+		# Now we'll check to see if the computer can win diagonally.
+
+		if tookTurn == false
+			n = 0
+			i = 1
+			while i <= 9
+				if @@board[i] == "O"
+					n += 1
+				end
+				i += 4
+			end
+			if n == 2
+				if @@board[1] != "O" && @@board[1] != "X"
+					@@board[1] = "O"
+					tookTurn = true
+				elsif @@board[5] != "O" && @@board[5] != "X"
+					@@board[5] = "O"
+					tookTurn = true
+				elsif @@board[9] != "O" && @@board[9] != "X"
+					@@board[9] = "O"
+					tookTurn = true
+				else
+				end
+			end
+		end
+
+		if tookTurn == false
+			n = 0
+			i = 3
+			while i <= 7
+				if @@board[i] == "O"
+					n += 1
+				end
+				i += 2
+			end
+			if n == 2
+				if @@board[3] != "O" && @@board[3] != "X"
+					@@board[3] = "O"
+					tookTurn = true
+				elsif @@board[5] != "O" && @@board[5] != "X"
+					@@board[5] = "O"
+					tookTurn = true
+				elsif @@board[7] != "O" && @@board[7] != "X"
+					@@board[7] = "O"
+					tookTurn = true
+				else
+				end
+			end
+		end
+
+		# If the computer has no chance at winning on its turn, it will move
+		# on to the next strategy: it'll check to see if the player is about
+		# to win, and if so, attempt to cut them off.
 
 		# check for horizontal dangers:
 		i = 1	
@@ -201,8 +252,7 @@ class TicTacToe
 				j += 3
 			end
 
-			if n == 2	# if a danger is detected (2 "X"s on a row), it'll cut
-						# off the player.
+			if n == 2
 				if @@board[i] != "O" && @@board[i] != "X"
 					@@board[i] = "O"
 					tookTurn = true
@@ -269,6 +319,9 @@ class TicTacToe
 			end
 		end
 		
+		# Finally, if a turn hasn't been taken yet, the program will just
+		# fill a random square.
+
 		if tookTurn == false
 			i = 1
 			while i < 9
@@ -355,7 +408,7 @@ def playTicTacToe
 	game.printBoard
 	puts "\nYou go first. Enter the number of the box\nyou want to place your X. Enter 'q' to quit."
 
-	#game.reset
+	game.reset
 	game.go
 
 	true
