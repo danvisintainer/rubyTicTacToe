@@ -123,13 +123,13 @@ class TicTacToe
 
 			if n == 2	
 				# here, 
-				if @@board[i] != "O" && @@board[i] != "X"
+				if isThisBoxAvailable(i)
 					@@board[i] = "O"
 					tookTurn = true
-				elsif @@board[i+1] != "O" && @@board[i+1] != "X"
+				elsif isThisBoxAvailable(i+1)
 					@@board[i+1] = "O"
 					tookTurn = true
-				elsif @@board[i+2] != "O" && @@board[i+2] != "X"
+				elsif isThisBoxAvailable(i+2)
 					@@board[i+2] = "O"
 					tookTurn = true
 				else
@@ -144,7 +144,6 @@ class TicTacToe
 		n = 0
 		i = 1
 		while i < 4 && n < 2 && tookTurn == false
-		# the tookTurn check is to ensure the program does not take two turns
 			n = 0
 			j = 0
 			while j <= 9
@@ -155,13 +154,13 @@ class TicTacToe
 			end
 
 			if n == 2	
-				if @@board[i] != "O" && @@board[i] != "X"
+				if isThisBoxAvailable(i)
 					@@board[i] = "O"
 					tookTurn = true
-				elsif @@board[i+3] != "O" && @@board[i+3] != "X"
+				elsif isThisBoxAvailable(i+3)
 					@@board[i+3] = "O"
 					tookTurn = true
-				elsif @@board[i+6] != "O" && @@board[i+6] != "X"
+				elsif isThisBoxAvailable(1+6)
 					@@board[i+6] = "O"
 					tookTurn = true
 				else
@@ -184,13 +183,13 @@ class TicTacToe
 				i += 4
 			end
 			if n == 2
-				if @@board[1] != "O" && @@board[1] != "X"
+				if isThisBoxAvailable(1)
 					@@board[1] = "O"
 					tookTurn = true
-				elsif @@board[5] != "O" && @@board[5] != "X"
+				elsif isThisBoxAvailable(5)
 					@@board[5] = "O"
 					tookTurn = true
-				elsif @@board[9] != "O" && @@board[9] != "X"
+				elsif isThisBoxAvailable(9)
 					@@board[9] = "O"
 					tookTurn = true
 				else
@@ -208,13 +207,13 @@ class TicTacToe
 				i += 2
 			end
 			if n == 2
-				if @@board[3] != "O" && @@board[3] != "X"
+				if isThisBoxAvailable(3)
 					@@board[3] = "O"
 					tookTurn = true
-				elsif @@board[5] != "O" && @@board[5] != "X"
+				elsif isThisBoxAvailable(5)
 					@@board[5] = "O"
 					tookTurn = true
-				elsif @@board[7] != "O" && @@board[7] != "X"
+				elsif isThisBoxAvailable(7)
 					@@board[7] = "O"
 					tookTurn = true
 				else
@@ -242,13 +241,13 @@ class TicTacToe
 
 			if n == 2	# if a danger is detected (2 "X"s on a row), it'll cut
 						# off the player.
-				if @@board[i] != "O" && @@board[i] != "X"
+				if isThisBoxAvailable(i)
 					@@board[i] = "O"
 					tookTurn = true
-				elsif @@board[i+1] != "O" && @@board[i+1] != "X"
+				elsif isThisBoxAvailable(i+1)
 					@@board[i+1] = "O"
 					tookTurn = true
-				elsif @@board[i+2] != "O" && @@board[i+2] != "X"
+				elsif isThisBoxAvailable(i+2)
 					@@board[i+2] = "O"
 					tookTurn = true
 				else
@@ -263,7 +262,6 @@ class TicTacToe
 		n = 0
 		i = 1
 		while i < 4 && n < 2 && tookTurn == false
-		# the tookTurn check is to ensure the program does not take two turns
 			n = 0
 			j = 0
 			while j <= 9
@@ -274,13 +272,13 @@ class TicTacToe
 			end
 
 			if n == 2
-				if @@board[i] != "O" && @@board[i] != "X"
+				if isThisBoxAvailable(i)
 					@@board[i] = "O"
 					tookTurn = true
-				elsif @@board[i+3] != "O" && @@board[i+3] != "X"
+				elsif isThisBoxAvailable(i+3)
 					@@board[i+3] = "O"
 					tookTurn = true
-				elsif @@board[i+6] != "O" && @@board[i+6] != "X"
+				elsif isThisBoxAvailable(i+6)
 					@@board[i+6] = "O"
 					tookTurn = true
 				else
@@ -302,13 +300,13 @@ class TicTacToe
 				i += 4
 			end
 			if n == 2
-				if @@board[1] != "O" && @@board[1] != "X"
+				if isThisBoxAvailable(1)
 					@@board[1] = "O"
 					tookTurn = true
-				elsif @@board[5] != "O" && @@board[5] != "X"
+				elsif isThisBoxAvailable(5)
 					@@board[5] = "O"
 					tookTurn = true
-				elsif @@board[9] != "O" && @@board[9] != "X"
+				elsif isThisBoxAvailable(9)
 					@@board[9] = "O"
 					tookTurn = true
 				else
@@ -326,13 +324,13 @@ class TicTacToe
 				i += 2
 			end
 			if n == 2
-				if @@board[3] != "O" && @@board[3] != "X"
+				if isThisBoxAvailable(3)
 					@@board[3] = "O"
 					tookTurn = true
-				elsif @@board[5] != "O" && @@board[5] != "X"
+				elsif isThisBoxAvailable(5)
 					@@board[5] = "O"
 					tookTurn = true
-				elsif @@board[7] != "O" && @@board[7] != "X"
+				elsif isThisBoxAvailable(7)
 					@@board[7] = "O"
 					tookTurn = true
 				else
@@ -346,7 +344,7 @@ class TicTacToe
 		if tookTurn == false
 			i = 1
 			while i < 9
-				if @@board[i] != "O" && @@board[i] != "X"
+				if isThisBoxAvailable(i)
 					unused << @@board[i]
 				end
 				i += 1
