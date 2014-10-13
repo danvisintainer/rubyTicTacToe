@@ -33,6 +33,7 @@ class TicTacToe
 		@@board = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 		@@used = 0
 		@@winner = ""
+		@@turn = 0
 	end
 
 	# thereIsAWinner checks the board to see if someone won the game - returns
@@ -425,12 +426,11 @@ end
 def playTicTacToe
 
 	game = TicTacToe.new
+	game.reset
 
 	puts "\nLet's play Tic Tac Toe!\nYou will be X, and I will be O."
 	game.printBoard
 	puts "\nYou go first. Enter the number of the box\nyou want to place your X. Enter 'q' to quit."
-
-	game.reset
 	game.go
 
 end
