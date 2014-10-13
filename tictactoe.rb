@@ -358,69 +358,57 @@ class TicTacToe
 		if tookTurn
 			@@used += 1
 		end
-
-		printBoard
 	end
 
 	# go is where the game loop happens.
 	def go
-		input = gets.chomp
+		turnTaken = false
+		input = ""
 
 		while input != "q"
-			if input.ord >= 49 && input.ord <= 57
-				if isThisBoxAvailable(myAtoI(input))
-					@@board[myAtoI(input)] = "X"
-					@@used += 1
-					printBoard
-
-					# there could only possibly be a winner if 5 or more
-					# squares were used, so we'll check for winners
-					# at that point.
-					if @@used >= 5 && thereIsAWinner
-						if @@winner == "X"
-							puts "Congratulations, you win!"
-							return true
-						elsif @@winner == "O"
-							puts "I win!"
-							return true
-						else
-							puts "Unfortunately, there was an unexpected problem."
-							return false
-						end
-					elsif @@used >= 9
-						puts "It's a draw game..."
-						return true
+			if @@turn == 0	# if it's the player's turn
+				input = gets.chomp
+				if input.ord >= 49 && input.ord <= 57
+					if isThisBoxAvailable(myAtoI(input))
+						@@board[myAtoI(input)] = "X"
+						@@used += 1
+						@@turn = 1
 					else
+						puts "Hey, that square is already taken. Choose another one!"
 					end
-					
-					computerTurn
-
-					if @@used >= 5 && thereIsAWinner
-						if @@winner == "X"
-							puts "Congratulations, you win!"
-							return true
-						elsif @@winner == "O"
-							puts "I win!"
-							return true
-						else
-							puts "Unfortunately, there was an unexpected problem."
-							return false
-						end
-					elsif @@used >= 9
-						puts "It's a draw game..."
-						return true
-					else
-						puts "\nIt's your turn!"
-					end
-						
 				else
-					puts "Hey, that square is already taken! Try another one."
+					puts "Your input is invalid. Try again!"
 				end
-			else
-				puts "Hey, I don't recognize that input. Try again!"
+			
+			elsif @@turn == 1	# if it's the computer's turn
+				computerTurn
+				@@turn = 0
 			end
 
-			input = gets.chomp
+			puts "Next turn. (%s)" % [@@turn]
+			printBoard
+
+			# there could only possibly be a winner if 5 or more
+			# squares were used, so we'll check for winners
+			# at that point.
+
+			if @@used >= 5 && thereIsAWinner
+				if @@winner == "X"
+					puts "Congratulations, you win!"
+					return true
+				elsif @@winner == "O"
+					puts "I win!"
+					return true
+				else
+					puts "Unfortunately, there was an unexpected problem."
+					return false
+				end
+			elsif @@used >= 9
+				puts "It's a draw game..."
+				return true
+			else
+			end
+
 		end
 	end
 end
