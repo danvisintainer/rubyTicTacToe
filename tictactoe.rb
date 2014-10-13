@@ -1,3 +1,11 @@
+# Command-Line Tic-Tac-Toe - Dan Visintainer
+# To play this, load it in IRB or a Ruby runtime environment and run
+# "playTicTacToe".
+#
+# This is a Ruby implementation of a command line Tic Tac Toe that I
+# did in order to familiarize myself with Ruby. It could be much more
+# efficient, but it works.
+
 class TicTacToe
 	@@board = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 	@@used = 0
@@ -40,7 +48,6 @@ class TicTacToe
 		while i < 4
 			if @@board[i] == @@board[i+3] && @@board[i+3] == @@board[i+6]
 				@@winner = @@board[i]
-				puts "Verital win on %s" % [i]
 				return true
 			end
 			i += 1
@@ -79,7 +86,7 @@ class TicTacToe
 		tookTurn = false
 		unused = []
 
-		# I'll be trying my hand at a rather defensive AI
+		# I'll be trying my hand at a simple but rather defensive AI
 		# First and above all else, if the program has the chance to win,
 		# it will.		
 
@@ -379,6 +386,7 @@ class TicTacToe
 							return true
 						else
 							puts "Unfortunately, there was an unexpected problem."
+							return false
 						end
 					elsif @@used >= 9
 						puts "It's a draw game..."
@@ -394,7 +402,6 @@ class TicTacToe
 				puts "Hey, I don't recognize that input. Try again!"
 			end
 
-			
 			input = gets.chomp
 		end
 	end
