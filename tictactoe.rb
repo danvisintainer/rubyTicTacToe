@@ -364,63 +364,47 @@ class TicTacToe
 
 	# go is where the game loop happens.
 	def go
-		input = gets.chomp
-
 		while input != "q"
-			if input.ord >= 49 && input.ord <= 57
-				if isThisBoxAvailable(myAtoI(input))
-					@@board[myAtoI(input)] = "X"
-					@@used += 1
-					printBoard
+			if @@turn == 0
+				input = gets.chomp
+				if input.ord >= 49 && input.ord <= 57
+					if isThisBoxAvailable(myAtoI(input))
+						@@board[myAtoI(input)] = "X"
+						@@used += 1
+						printBoard
 
-					# there could only possibly be a winner if 5 or more
-					# squares were used, so we'll check for winners
-					# at that point.
-					if @@used >= 5 && thereIsAWinner
-						if @@winner == "X"
-							puts "Congratulations, you win!"
-							return true
-						elsif @@winner == "O"
-							puts "I win!"
+						# there could only possibly be a winner if 5 or more
+						# squares were used, so we'll check for winners
+						# at that point.
+						if @@used >= 5 && thereIsAWinner
+							if @@winner == "X"
+								puts "Congratulations, you win!"
+								return true
+							elsif @@winner == "O"
+								puts "I win!"
+								return true
+							else
+								puts "Unfortunately, there was an unexpected problem."
+								return false
+							end
+						elsif @@used >= 9
+							puts "It's a draw game..."
 							return true
 						else
-							puts "Unfortunately, there was an unexpected problem."
-							return false
 						end
-					elsif @@used >= 9
-						puts "It's a draw game..."
-						return true
-					else
-					end
-					
-					computerTurn
-
-					if @@used >= 5 && thereIsAWinner
-						if @@winner == "X"
-							puts "Congratulations, you win!"
-							return true
-						elsif @@winner == "O"
-							puts "I win!"
-							return true
-						else
-							puts "Unfortunately, there was an unexpected problem."
-							return false
-						end
-					elsif @@used >= 9
-						puts "It's a draw game..."
-						return true
-					else
-						puts "\nIt's your turn!"
-					end
 						
+						computerTurn
+							
+					else
+						puts "Hey, that square is already taken! Try another one."
+					end
 				else
-					puts "Hey, that square is already taken! Try another one."
+					puts "Hey, I don't recognize that input. Try again!"
 				end
-			else
-				puts "Hey, I don't recognize that input. Try again!"
+			
+			elsif @@turn == 1
+				computerTurn
 			end
-
-			input = gets.chomp
 		end
 	end
 end
